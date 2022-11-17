@@ -4,12 +4,10 @@ Date: Fri, 24 Dec 2021 18:12:25 +1100
 Subject: [PATCH 1/1] Put apple-bce and apple-ibridge in drivers/staging
 
 ---
- drivers/staging/Kconfig                |  4 ++++
- drivers/staging/Makefile               |  2 ++
+ drivers/staging/Kconfig                |  2 ++
+ drivers/staging/Makefile               |  1 +
  drivers/staging/apple-bce/Kconfig      | 18 ++++++++++++++++++
  drivers/staging/apple-bce/Makefile     |  2 +-
- drivers/staging/apple-ibridge/Kconfig  | 15 +++++++++++++++
- drivers/staging/apple-ibridge/Makefile |  6 +++---
  6 files changed, 43 insertions(+), 4 deletions(-)
  create mode 100644 drivers/staging/apple-bce/Kconfig
  create mode 100644 drivers/staging/apple-ibridge/Kconfig
@@ -18,25 +16,22 @@ diff --git a/drivers/staging/Kconfig b/drivers/staging/Kconfig
 index e03627a..fc121d5 100644
 --- a/drivers/staging/Kconfig
 +++ b/drivers/staging/Kconfig
-@@ -102,4 +102,8 @@ source "drivers/staging/qlge/Kconfig"
+@@ -102,4 +102,6 @@ source "drivers/staging/qlge/Kconfig"
  
  source "drivers/staging/wfx/Kconfig"
  
 +source "drivers/staging/apple-bce/Kconfig"
-+
-+source "drivers/staging/apple-ibridge/Kconfig"
 +
  endif # STAGING
 diff --git a/drivers/staging/Makefile b/drivers/staging/Makefile
 index c7f8d8d..debad40 100644
 --- a/drivers/staging/Makefile
 +++ b/drivers/staging/Makefile
-@@ -41,3 +41,5 @@ obj-$(CONFIG_XIL_AXIS_FIFO)	+= axis-fifo/
+@@ -41,3 +41,4 @@ obj-$(CONFIG_XIL_AXIS_FIFO)	+= axis-fifo/
  obj-$(CONFIG_XIL_AXIS_FIFO)	+= axis-fifo/
  obj-$(CONFIG_FIELDBUS_DEV)     += fieldbus/
  obj-$(CONFIG_QLGE)		+= qlge/
 +obj-$(CONFIG_APPLE_BCE)		+= apple-bce/
-+obj-$(CONFIG_APPLE_IBRIDGE)	+= apple-ibridge/
 diff --git a/drivers/staging/apple-bce/Kconfig b/drivers/staging/apple-bce/Kconfig
 new file mode 100644
 index 0000000..bbfb89b
@@ -72,41 +67,6 @@ index a6a656f..8cfbd3f 100644
  
  apple-bce-objs := apple_bce.o mailbox.o queue.o queue_dma.o vhci/vhci.o vhci/queue.o vhci/transfer.o audio/audio.o audio/protocol.o audio/protocol_bce.o audio/pcm.o
  
-diff --git a/drivers/staging/apple-ibridge/Kconfig b/drivers/staging/apple-ibridge/Kconfig
-new file mode 100644
-index 0000000..0716486
---- /dev/null
-+++ b/drivers/staging/apple-ibridge/Kconfig
-@@ -0,0 +1,15 @@
-+config APPLE_IBRIDGE
-+	tristate "Apple iBridge driver (Touchbar and ALS support)"
-+	default m
-+	depends on X86
-+	select HID
-+	select IIO
-+	select IIO_TRIGGERED_BUFFER
-+	select IIO_BUFFER
-+	select ACPI_ALS
-+	help
-+	  Driver for the Touchbar and ALS (Ambient Light Sensor) on some
-+	  Apple computers.
-+	  
-+	  If "M" is selected, the modules will be called apple-ibridge,
-+	  apple-ib-tb and apple-ib-als.
-diff --git a/drivers/staging/apple-ibridge/Makefile b/drivers/staging/apple-ibridge/Makefile
-index ea40afe..ae129bd 100644
---- a/drivers/staging/apple-ibridge/Makefile
-+++ b/drivers/staging/apple-ibridge/Makefile
-@@ -1,6 +1,6 @@
--obj-m += apple-ibridge.o
--obj-m += apple-ib-tb.o
--obj-m += apple-ib-als.o
-+obj-$(CONFIG_APPLE_IBRIDGE) += apple-ibridge.o
-+obj-$(CONFIG_APPLE_IBRIDGE) += apple-ib-tb.o
-+obj-$(CONFIG_APPLE_IBRIDGE) += apple-ib-als.o
- 
- KVERSION := $(KERNELRELEASE)
- ifeq ($(origin KERNELRELEASE), undefined)
 -- 
 2.34.1
 

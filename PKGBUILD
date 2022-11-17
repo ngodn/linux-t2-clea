@@ -6,7 +6,7 @@
 pkgbase=linux-t2
 pkgver=6.0.8
 _srcname=linux-${pkgver}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux kernel for T2 Macs'
 _srctag=v${pkgver%.*}-${pkgver##*.}
 url="https://github.com/archlinux/linux/commits/$_srctag"
@@ -27,12 +27,14 @@ source=(
   # Arch Linux patches
   0001-arch-additions.patch
 
-  # apple-bce, apple-ibridge
+  # apple-bce
   apple-bce::git+https://github.com/t2linux/apple-bce-drv#commit=6988ec2f08ed7092211540ae977f4ddb56d4fd49
-  apple-ibridge::git+https://github.com/Redecorating/apple-ib-drv#commit=467df9b11cb55456f0365f40dd11c9e666623bf3
 
-  1001-Put-apple-bce-and-apple-ibridge-in-drivers-staging.patch
+  1001-Put-apple-bce-in-drivers-staging.patch
   1002-add-modalias-to-apple-bce.patch
+
+  # Touch Bar, Magic Keyboard Backlight
+  1003-ibridge.patch
 
   # ACPI fixes
   2001-fix-acpica-for-zero-arguments-acpi-calls.patch
@@ -85,7 +87,7 @@ prepare() {
   echo "-$pkgrel" > localversion.10-pkgrel
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
-  for i in apple-bce apple-ibridge; do
+  for i in apple-bce; do
     echo "Copying $i in to drivers/staging..."
 	# no need to copy .git/
 	mkdir drivers/staging/$i
@@ -104,7 +106,10 @@ prepare() {
   echo "Setting config..."
   cp ../config .config
   make olddefconfig
-  ./scripts/config --module BT_HCIBCM4377
+  for i in BT_HCIBCM4377 CONFIG_HID_APPLE_IBRIDGE CONFIG_HID_APPLE_TOUCHBAR CONFIG_HID_APPLE_MAGIC_BACKLIGHT; do
+    echo "Enabling $i as module."
+    ./scripts/config --module $i
+  done
   diff -u ../config .config || :
 
   make -s kernelrelease > version
@@ -260,9 +265,9 @@ sha256sums=('0de4f83996951c6faf9b2225db4f645882c47b1a09198190f97bd46e5f5fa257'
             '05168cbbeb6378eec6c84fe3300cede4fa5cf6130c39fb8af95040529bd390a6'
             '944db444899ad51c1d31cb2b972d0fa8854d6f2e391b333935edbc61a91f8afc'
             'SKIP'
-            'SKIP'
-            '4482f285a66a31561452c81f232ec9c4396dc95c40a37645c7c47d7bc8b26184'
+            '5e5e93d1456afd163701d5a4c2a31454214e0efa841cafa3c35ef24b03189cf5'
             'a3a43feaffccbcd119f4a1b4e1299ef07ae36ef9bffc17767bf10e447fa02a2a'
+            '8046905cc7d4e9da3f81c137e8de52f84547599a3e2a43a122c03eb09411455c'
             '45b911e592dd6c717e77ec4d8cbf844860bb7c29ace7a7170e7bf59c12e91bb4'
             '32d3915b4d50cfc654dda53e65e633d1e99b6c98795cbb7416f1ae8fe1ea2321'
             '515756555e7a6178f38c82bb1dbc2919aa9660ee8b9e158f3764948578dee92c'
