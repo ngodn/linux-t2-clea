@@ -29,7 +29,7 @@ source=(
   https://github.com/archlinux/linux/compare/$UPSTREAM_HASH...archlinux:v$pkgver-arch1.patch
 
   # t2linux Patches
-  patches::git+https://github.com/t2linux/linux-t2-patches#commit=5c2a3930cbc83bab1381239cc49c1047db94e753
+  patches::git+https://github.com/t2linux/linux-t2-patches#commit=c756aa690f13dfd9eb2c0cef56c3d75b47b4c9a5
 
 )
 validpgpkeys=(
