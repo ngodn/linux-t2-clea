@@ -3,7 +3,7 @@
 #               Additionally, MrARM and Ronald Tschalär wrote apple-bce and
 #               apple-ibridge drivers, respectively.
 
-UPSTREAM_HASH=ebdb69c5b054f115ef5ff72f0bb2aaa1718904e6
+UPSTREAM_HASH=d6a980a0da6cacb523bb1e069b1780ae1c3086a7
 pkgbase=linux-t2
 pkgver=6.1.2
 _srcname=linux-${pkgver}
