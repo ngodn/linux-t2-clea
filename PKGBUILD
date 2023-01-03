@@ -5,9 +5,9 @@
 
 UPSTREAM_HASH=ebdb69c5b054f115ef5ff72f0bb2aaa1718904e6
 pkgbase=linux-t2
-pkgver=6.1.1
+pkgver=6.1.2
 _srcname=linux-${pkgver}
-pkgrel=2
+pkgrel=1
 pkgdesc='Linux kernel for T2 Macs'
 _srctag=v${pkgver%.*}-${pkgver##*.}
 url="https://github.com/archlinux/linux/commits/$_srctag"
@@ -214,7 +214,7 @@ for _p in "${pkgname[@]}"; do
   }"
 done
 
-sha256sums=('a3e61377cf4435a9e2966b409a37a1056f6aaa59e561add9125a88e3c0971dfb'
+sha256sums=('ee41f3c4f599b2f46f08aae428c9243db403e7292eb2c9f04ee34909b038d1ae'
             'SKIP'
             '0571ea17a2e38458096b679418197bbea8c414388f628d122517f3a1f3a31b3a'
             'fc55aa3693966da4f87c4bf9350e6062f03dbe6c6c87ec100657476ce9aba51f'
