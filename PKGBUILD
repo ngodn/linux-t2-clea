@@ -217,6 +217,6 @@ done
 sha256sums=('ee41f3c4f599b2f46f08aae428c9243db403e7292eb2c9f04ee34909b038d1ae'
             'SKIP'
             '0571ea17a2e38458096b679418197bbea8c414388f628d122517f3a1f3a31b3a'
-            'SKIP
+            'SKIP'
             'SKIP')
 # vim:set ts=8 sts=2 sw=2 et:
