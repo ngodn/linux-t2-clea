@@ -4,7 +4,7 @@
 #               apple-ibridge drivers, respectively.
 
 UPSTREAM_HASH=d6a980a0da6cacb523bb1e069b1780ae1c3086a7
-pkgbase=linux-t2
+pkgbase=linux-t2-wifi
 pkgver=6.1.2
 _srcname=linux-${pkgver}
 pkgrel=1
