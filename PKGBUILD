@@ -7,7 +7,7 @@ UPSTREAM_HASH=d6a980a0da6cacb523bb1e069b1780ae1c3086a7
 pkgbase=linux-t2-wifi
 pkgver=6.1.2
 _srcname=linux-${pkgver}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux kernel for T2 Macs'
 _srctag=v${pkgver%.*}-${pkgver##*.}
 url="https://github.com/archlinux/linux/commits/$_srctag"
@@ -29,7 +29,7 @@ source=(
   https://github.com/archlinux/linux/compare/$UPSTREAM_HASH...archlinux:v$pkgver-arch1.patch
 
   # t2linux Patches
-  patches::git+https://github.com/t2linux/linux-t2-patches#commit=07e2bdbd42783157bc2763453e754926b0722b20
+  patches::git+https://github.com/t2linux/linux-t2-patches#commit=101fe7329baa579b3ea586f07fe3bb4c2dc18de2
 
 )
 validpgpkeys=(
