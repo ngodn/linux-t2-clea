@@ -3,9 +3,9 @@
 #               Additionally, MrARM and Ronald Tschalär wrote apple-bce and
 #               apple-ibridge drivers, respectively.
 
-UPSTREAM_HASH=ebdb69c5b054f115ef5ff72f0bb2aaa1718904e6
-pkgbase=linux-t2
-pkgver=6.1.1
+UPSTREAM_HASH=d6a980a0da6cacb523bb1e069b1780ae1c3086a7
+pkgbase=linux-t2-wifi
+pkgver=6.1.2
 _srcname=linux-${pkgver}
 pkgrel=1
 pkgdesc='Linux kernel for T2 Macs'
@@ -29,7 +29,7 @@ source=(
   https://github.com/archlinux/linux/compare/$UPSTREAM_HASH...archlinux:v$pkgver-arch1.patch
 
   # t2linux Patches
-  patches::git+https://github.com/t2linux/linux-t2-patches#commit=5c2a3930cbc83bab1381239cc49c1047db94e753
+  patches::git+https://github.com/t2linux/linux-t2-patches#commit=07e2bdbd42783157bc2763453e754926b0722b20
 
 )
 validpgpkeys=(
@@ -214,9 +214,9 @@ for _p in "${pkgname[@]}"; do
   }"
 done
 
-sha256sums=('a3e61377cf4435a9e2966b409a37a1056f6aaa59e561add9125a88e3c0971dfb'
+sha256sums=('ee41f3c4f599b2f46f08aae428c9243db403e7292eb2c9f04ee34909b038d1ae'
             'SKIP'
             '0571ea17a2e38458096b679418197bbea8c414388f628d122517f3a1f3a31b3a'
-            'fc55aa3693966da4f87c4bf9350e6062f03dbe6c6c87ec100657476ce9aba51f'
+            'SKIP'
             'SKIP')
 # vim:set ts=8 sts=2 sw=2 et:
