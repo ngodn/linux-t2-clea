@@ -4,13 +4,13 @@
 #               Additionally, MrARM and Ronald Tschalär wrote apple-bce and
 #               apple-ibridge drivers, respectively.
 
-pkgbase="linux-t2"
-pkgver=6.4.4
+pkgbase="linux-lts-t2"
+pkgver=6.1.39
 _srcname=linux-${pkgver}
 pkgrel=1
 pkgdesc='Linux kernel for T2 Macs'
 _srctag=v${pkgver%.*}-${pkgver##*.}
-url="https://github.com/archlinux/linux/commits/$_srctag"
+url="https://gitlab.archlinux.org/archlinux/packaging/packages/linux-lts"
 arch=(x86_64)
 license=(GPL2)
 makedepends=(
@@ -34,14 +34,14 @@ makedepends=(
 conflicts=('apple-gmux-t2-dkms-git')
 replaces=('apple-gmux-t2-dkms-git')
 options=('!strip')
-_srcname="linux-${pkgver}-arch1"
-T2_PATCH_HASH=c0db79a25bc37dbd0c27636914b3903016a2fc39
+_srcname="linux-${pkgver}"
 source=(
-  https://github.com/archlinux/linux/archive/refs/tags/v${pkgver}-arch1.tar.gz
+  https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   config  # the main kernel config file
+  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
 
   # t2linux Patches
-  patches::git+https://github.com/t2linux/linux-t2-patches
+  patches::git+https://github.com/t2linux/linux-t2-patches#branch=6.1
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
@@ -61,7 +61,7 @@ prepare() {
   cd $_srcname
 
   echo "Setting version..."
-  echo "-Yagakimi-T2" > localversion.10-codename
+  echo "-Watanare-T2" > localversion.10-codename
   echo "-$pkgrel" > localversion.20-pkgrel
   echo "${pkgbase#linux}" > localversion.30-pkgname
   make defconfig
@@ -109,6 +109,8 @@ _package() {
     VIRTUALBOX-GUEST-MODULES
     WIREGUARD-MODULE
     linux
+    linux-t2
+    linux-lts
   )
   replaces=(
     virtualbox-guest-modules-arch
@@ -137,7 +139,7 @@ _package() {
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for the $pkgdesc kernel"
   depends=(pahole)
-  provides=(linux-headers)
+  provides=(linux-headers linux-t2-headers linux-lts-headers)
 
   cd $_srcname
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
@@ -249,7 +251,9 @@ for _p in "${pkgname[@]}"; do
   }"
 done
 
-sha256sums=('7c16609318b23497977dbe4816618d4c5556a99f14f3b1a404713a163483358f'
-            '6b337a9d3cfdc00005589a80b8d36fa500f6a92ed21565a3aceec48d7202a7da'
+sha256sums=('4cddee22fdf657138a06af653492f67cd3a4762c04a34725534bd200d99085b8'
+            'SKIP'
+            '20e2f62eb004af3f47609b4ab3380d8e870d51eba0df5f318a565910eada3503'
+            '1bd8388fcb6ed4eec46450c65eb7a0889a8c541f164a39e3064633981a7a4a3d'
             'SKIP')
 # vim:set ts=8 sts=2 sw=2 et:
