@@ -133,7 +133,7 @@ _package() {
     DEPMOD=/doesnt/exist modules_install  # Suppress depmod
 
   # remove build and source links
-  rm "$modulesdir"/{source,build}
+  rm "$modulesdir"/build
 }
 
 _package-headers() {
