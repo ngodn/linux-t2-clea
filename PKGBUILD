@@ -5,7 +5,7 @@
 #               apple-ibridge drivers, respectively.
 
 pkgbase="linux-lts-t2"
-pkgver=6.6.72
+pkgver=6.12.12
 _srcname=linux-${pkgver}
 pkgrel=1
 pkgdesc='Linux kernel for T2 Macs'
@@ -39,9 +39,11 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   config  # the main kernel config file
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+  0002-Default-to-maximum-amount-of-ASLR-bits.patch
+  0003-skip-simpledrm-if-nvidia-drm.modeset\=1-is.patch
 
   # t2linux Patches
-  patches::git+https://github.com/t2linux/linux-t2-patches#branch=6.6
+  patches::git+https://github.com/t2linux/linux-t2-patches#branch=6.12
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
@@ -251,9 +253,11 @@ for _p in "${pkgname[@]}"; do
   }"
 done
 
-sha256sums=('feb9e514930d5968daa0b8b5486d3295d1fb2b34accf876207641884d4baef39'
+sha256sums=('e98942d17ef7063b3f2d6d7692bf24899e2e021cf832d19b55308ec8e8e08eff'
             'SKIP'
             '20e2f62eb004af3f47609b4ab3380d8e870d51eba0df5f318a565910eada3503'
-            '1bd8388fcb6ed4eec46450c65eb7a0889a8c541f164a39e3064633981a7a4a3d'
+            '3cf389ced2b40e6457421cb27892bf126b73032fbf1de895ecc37b13d981a17c'
+            '423b2c6fbc8d6df79997550bef1b1e4f6f402b668007d150013623a83a12b49e'
+            '596f8e0aef1df72a84685e8f2b8a9dde7e33b513de555fae6069ba652cbd00c1'
             'SKIP')
 # vim:set ts=8 sts=2 sw=2 et:
