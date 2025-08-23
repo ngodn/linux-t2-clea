@@ -6,7 +6,9 @@
 #               apple-ibridge drivers, respectively.
 
 pkgbase="linux-t2"
-_pkgver=6.16.1
+# Source kernel version from patches/version file
+source "$PWD/patches/version"
+_pkgver=${KVER}
 pkgver=${_pkgver}
 _srcname=linux-${_pkgver}
 pkgrel=1
