@@ -6,14 +6,15 @@
 #               apple-ibridge drivers, respectively.
 
 pkgbase="linux-t2"
-_pkgver=6.16.1
+_pkgver=6.16.2
+_xanmodrel=1
 pkgver=${_pkgver}
 _srcname=linux-${_pkgver}
 pkgrel=1
 archrel=1
-pkgdesc='Linux kernel for T2 Macs'
+pkgdesc='Linux kernel for T2 Macs with XanMod patches'
 _srctag=v${_pkgver%.*}-${_pkgver##*.}
-url="https://github.com/archlinux/linux/commits/$_srctag"
+url="https://gitlab.com/xanmod/linux"
 arch=(x86_64)
 license=(GPL2)
 makedepends=(
@@ -38,9 +39,9 @@ makedepends=(
 conflicts=('apple-gmux-t2-dkms-git')
 replaces=('apple-gmux-t2-dkms-git')
 options=('!strip')
-_srcname="linux-${_pkgver}-arch${archrel}"
+_srcname="linux-${_pkgver}-xanmod${_xanmodrel}"
 source=(
-  https://github.com/archlinux/linux/archive/refs/tags/v${_pkgver}-arch${archrel}.tar.gz
+  https://gitlab.com/xanmod/linux/-/archive/${_pkgver}-xanmod${_xanmodrel}/linux-${_pkgver}-xanmod${_xanmodrel}.tar.gz
   config  # the main kernel config file
 )
 validpgpkeys=(
@@ -69,7 +70,7 @@ prepare() {
   git checkout . 2>/dev/null || true
 
   echo "Setting version..."
-  echo "-Abbest-T2" > localversion.10-codename
+  echo "-Abbest-T2-xanmod${_xanmodrel}" > localversion.10-codename
   echo "-$pkgrel" > localversion.20-pkgrel
   echo "${pkgbase#linux}" > localversion.30-pkgname
   make defconfig
@@ -269,17 +270,17 @@ _package-docs() {
 }
 
 pkgname=(
-  "$pkgbase"
-  "$pkgbase-headers"
-  "$pkgbase-docs"
+  "$pkgbase-xanmod${_xanmodrel}"
+  "$pkgbase-xanmod${_xanmodrel}-headers"
+  "$pkgbase-xanmod${_xanmodrel}-docs"
 )
 for _p in "${pkgname[@]}"; do
   eval "package_$_p() {
-    $(declare -f "_package${_p#$pkgbase}")
-    _package${_p#$pkgbase}
+    $(declare -f "_package${_p#$pkgbase-xanmod${_xanmodrel}}")
+    _package${_p#$pkgbase-xanmod${_xanmodrel}}
   }"
 done
 
-sha256sums=('e2865c606c4321a26ab39f33182bec1539a3e635021d7a72d50a6280e6f49a44'  # kernel tarball
+sha256sums=('SKIP'  # xanmod kernel tarball - will need to be updated
             'SKIP')  # local config file
 # vim:set ts=8 sts=2 sw=2 et:
