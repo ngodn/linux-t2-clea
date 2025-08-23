@@ -1,5 +1,5 @@
 *.tar.*
 src/
 pkg/
-patches/
 PKGBUILD.orig
+patches/
